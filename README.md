@@ -5,6 +5,7 @@ A trojan downloader which will download any file using a direct download link st
 - The final file size will be less than 10 mb
 - This downloader is stealthy
 - Simple setup
+- Built in anti vm
 
 # Installation guide
 - Open install-requirements.bat
